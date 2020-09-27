@@ -24,7 +24,8 @@
   "dependencies": {
     "discord.js": "^12.2.0",
     "dotenv": "^8.2.0",
-    "mongodb": "^3.6.0"
+    "mongodb": "^3.6.0",
+    "monk": "^7.3.2"
   },
   "devDependencies": {
     "eslint": "^7.7.0",

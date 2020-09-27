@@ -1,10 +1,9 @@
 module.exports = {
   name: 'ping',
   description: 'Ping!',
-  needsMongoClient: false,
   /*  eslint-disable no-unused-vars */
   execute(message, args = null) {
+    /*  eslint-enable no-unused-vars */
     message.channel.send('Pong');
   },
-  /*  eslint-enable no-unused-vars */
 };

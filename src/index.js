@@ -1,26 +1,11 @@
 const Discord = require('discord.js');
 const fs = require('fs');
 const { prefix } = require('./const.json');
-const { MongoClient } = require('mongodb');
 
-// mongodb+srv://discordbot:<password>@discordbot.l6wd7.gcp.mongodb.net/<dbname>?retryWrites=true&w=majority
 require('dotenv').config();
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
-
-const mongoUri = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@discordbot.l6wd7.gcp.mongodb.net/${process.env.MONGO_DATABASE}?retryWrites=true&w=majority`;
-
-const mongoClient = new MongoClient(mongoUri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-
-try {
-  mongoClient.connect();
-} catch (e) {
-  console.log(e);
-}
 
 const commandFiles = fs
   .readdirSync(`${__dirname}/commands/`)
@@ -43,11 +28,7 @@ client.on('message', (message) => {
   }
   try {
     const command = client.commands.get(commandName);
-    if (command.needsMongoClient) {
-      command.execute(message, args, mongoClient);
-    } else {
-      command.execute(message, args);
-    }
+    command.execute(message, args);
   } catch (e) {
     console.log(e);
     message.reply('Erro ao executar comando');
